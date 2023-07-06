@@ -206,7 +206,14 @@ export default function TasksMap({ navigation }) {
                   }}
                 >
                   <View style={{ marginLeft: "45%" }}>
-                    <Text style={[styles.text]}>{item.taskNumber}</Text>
+                    <Text
+                      style={[
+                        styles.text,
+                        !allLevels[index] && { backgroundColor: "#FF9F2E" },
+                      ]}
+                    >
+                      {item.taskNumber}
+                    </Text>
                     {allLevels[index].done == false && (
                       <View
                         style={{
@@ -257,6 +264,10 @@ export default function TasksMap({ navigation }) {
                         !allLevels[index - 1].done && {
                           backgroundColor: "#929495",
                         },
+                        !allLevels[index].done &&
+                          allLevels[index - 1].done && {
+                            backgroundColor: "#FF9F2E",
+                          },
                       ]}
                     >
                       {item.taskNumber}
