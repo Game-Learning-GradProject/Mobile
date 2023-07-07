@@ -6,7 +6,8 @@ import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Settings({ navigation }) {
-  const { playerName } = useSelector((state) => state.auth);
+  const { playerName, playerPic } = useSelector((state) => state.auth);
+  const { url } = useSelector((state) => state.global);
 
   return (
     <View style={styles.container}>
@@ -33,7 +34,12 @@ export default function Settings({ navigation }) {
           }}
         >
           <Image
-            source={require("../../assets/smile.png")}
+            // source={require("../../assets/smile.png")}
+            source={
+              playerPic === "Profile/default.png"
+                ? require("../../assets/smile.png")
+                : { uri: url + playerPic }
+            }
             style={{ width: "100%", height: "100%" }}
           />
         </View>
@@ -85,15 +91,16 @@ export default function Settings({ navigation }) {
 
       <TouchableOpacity
         style={styles.logoutContain}
-        onPress={() => {
-          SecureStore.deleteItemAsync("user");
-          AsyncStorage.clear();
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "Login" }],
-            })
-          );
+        onPress={async () => {
+          await SecureStore.deleteItemAsync("user");
+          await AsyncStorage.clear().then(() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 0,
+                routes: [{ name: "Login" }],
+              })
+            );
+          });
         }}
       >
         <Ionicons name="log-out-outline" size={50} style={styles.icon} />

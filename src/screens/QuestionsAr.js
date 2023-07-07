@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 
-import questions from "../data/questions";
+// import questions from "../data/questions";
 import { soundEffects } from "../modules";
 import { sendAttempts } from "../store/globalSlice";
 
@@ -13,11 +13,12 @@ const QuestionsAr = ({ navigation }) => {
 
   const route = useRoute();
 
-  // const { taskId } = route.params;
-  const taskId = "12345";
+  const data = route.params.word_Pic;
+  const { taskId } = route.params;
+  // const data = questions;
+  // const taskId = "12345";
 
   // const navigation = useNavigation();
-  const data = questions;
   const totalQuestions = data.length;
   // points
   const [points, setPoints] = useState(0);
@@ -48,7 +49,7 @@ const QuestionsAr = ({ navigation }) => {
 
   useEffect(() => {
     if (selectedAnswerIndex !== null) {
-      if (selectedAnswerIndex === currentQuestion?.correctAnswerIndex) {
+      if (selectedAnswerIndex == currentQuestion?.definitionInAc) {
         soundEffects(0);
         setPoints((points) => points + 10);
         setAnswerStatus(true);
@@ -140,17 +141,18 @@ const QuestionsAr = ({ navigation }) => {
         }}
       >
         <Text style={{ fontSize: 18, fontWeight: "bold", textAlign: "center" }}>
-          {currentQuestion?.question}
+          {currentQuestion?.sentence}
         </Text>
         <View style={{ marginTop: 12 }}>
-          {currentQuestion?.options.map((item, index) => (
+          {currentQuestion?.choices.map((item, index) => (
             <Pressable
+              key={index}
               onPress={() =>
                 selectedAnswerIndex === null && setSelectedAnswerIndex(index)
               }
               style={
                 selectedAnswerIndex === index &&
-                index === currentQuestion.correctAnswerIndex
+                index == currentQuestion.definitionInAc
                   ? {
                       flexDirection: "row",
                       alignItems: "center",
@@ -185,7 +187,7 @@ const QuestionsAr = ({ navigation }) => {
             >
               <Text style={{ marginRight: 10 }}>{item.answer}</Text>
               {selectedAnswerIndex === index &&
-              index === currentQuestion.correctAnswerIndex ? (
+              index == currentQuestion.definitionInAc ? (
                 <AntDesign
                   style={{
                     borderColor: "#00FFFF",
@@ -229,7 +231,7 @@ const QuestionsAr = ({ navigation }) => {
                     padding: 10,
                   }}
                 >
-                  {item.options}
+                  {item.letter}
                 </Text>
               )}
             </Pressable>
@@ -261,7 +263,7 @@ const QuestionsAr = ({ navigation }) => {
           </Text>
         )}
 
-        {index + 1 >= questions.length && answerStatus !== null ? (
+        {index + 1 >= data.length && answerStatus !== null ? (
           <Pressable
             onPress={() => setIndex(index + 1)}
             style={{

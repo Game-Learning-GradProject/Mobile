@@ -23,7 +23,12 @@ export const checkUser = createAsyncThunk(
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: { playerName: "friend", parentID: "", studentID: "" },
+  initialState: {
+    playerName: "friend",
+    parentID: "",
+    studentID: "",
+    playerPic: "../../assets/smile.png",
+  },
   reducers: {
     setPlayerName: (state, action) => {
       state.playerName = action.payload;
@@ -33,6 +38,9 @@ export const authSlice = createSlice({
     },
     setParentID: (state, action) => {
       state.parentID = action.payload;
+    },
+    setPlayerPic: (state, action) => {
+      state.playerPic = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +52,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.parentID = action.payload.student.ParentID;
         state.studentID = action.payload.student.studentID;
+        state.playerPic = action.payload.student.studentPic;
 
         console.log(action.payload);
 
@@ -56,5 +65,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setPlayerName, setStudentID, setParentID } = authSlice.actions;
+export const { setPlayerName, setStudentID, setParentID, setPlayerPic } =
+  authSlice.actions;
 export default authSlice.reducer;

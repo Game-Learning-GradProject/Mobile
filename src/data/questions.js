@@ -1,6 +1,71 @@
 export default [
   {
-    question: "؟ما معنى كلمه تجذب",
+    sentence: "ما معنى كلمه تجذب؟",
+    choices: [
+      {
+        letter: "أ",
+        answer: "تكذب",
+      },
+      {
+        letter: "ب",
+        answer: "تلهو",
+      },
+      {
+        letter: "جـ",
+        answer: "تشد",
+      },
+      {
+        letter: "د",
+        answer: "ترى",
+      },
+    ],
+    definitionInAc: "2",
+  },
+  {
+    sentence: "ما معنى كلمه الاطلاع؟",
+    choices: [
+      {
+        letter: "أ",
+        answer: "القراءه والمعرفه",
+      },
+      {
+        letter: "ب",
+        answer: "الجهل",
+      },
+      {
+        letter: "جـ",
+        answer: "الاستماع",
+      },
+      {
+        letter: "د",
+        answer: "المناظره",
+      },
+    ],
+    definitionInAc: "0",
+  },
+  {
+    sentence: "ما معنى كلمه ينفق",
+    choices: [
+      {
+        letter: "أ",
+        answer: "يصدق",
+      },
+      {
+        letter: "ب",
+        answer: "يصرف",
+      },
+      {
+        letter: "جـ",
+        answer: "يبكي",
+      },
+    ],
+    definitionInAc: "1",
+  },
+];
+
+[
+  {
+    question: "ما معنى كلمه تجذب؟",
     options: [
       {
         id: "0",

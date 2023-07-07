@@ -25,6 +25,7 @@ export const fetchData = createAsyncThunk(
       );
       const data = await res.json();
       // console.log("tasks:", data);
+      console.log("data:", data);
 
       return data;
     } catch (error) {
@@ -95,9 +96,11 @@ const globalSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.word_Pic = action.payload.sort(
-          (a, b) => a.taskNumber - b.taskNumber
-        );
+        !action.payload.status
+          ? (state.word_Pic = action.payload.sort(
+              (a, b) => a.taskNumber - b.taskNumber
+            ))
+          : (state.word_Pic = []);
         console.log("fetch success");
       })
       .addCase(fetchData.rejected, (state, action) => {

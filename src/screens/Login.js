@@ -14,7 +14,12 @@ import {
 import { useDispatch } from "react-redux";
 import * as SecureStore from "expo-secure-store";
 
-import { setPlayerName, setParentID, setStudentID } from "../store/authSlice";
+import {
+  setPlayerName,
+  setParentID,
+  setStudentID,
+  setPlayerPic,
+} from "../store/authSlice";
 import { checkUser } from "../store/authSlice";
 import styles from "../styles";
 
@@ -29,6 +34,7 @@ const Login = ({ navigation }) => {
   const getLoginInfo = async () => {
     let user = await SecureStore.getItemAsync("user");
     user = await JSON.parse(user);
+    console.log("user:", user);
     return user;
   };
   const deleteCache = async () => {
@@ -40,6 +46,7 @@ const Login = ({ navigation }) => {
       if (user) {
         setSplash(true);
         dispatch(setPlayerName(user.name));
+        dispatch(setPlayerPic(user.pic));
         dispatch(setStudentID(user.studentID));
         dispatch(setParentID(user.parentID));
         navigation.replace("TasksMap");
@@ -68,7 +75,8 @@ const Login = ({ navigation }) => {
               password: password.trim(),
               name: data.student.studentName,
               studentID: data.student.studentID,
-              parentID: data.student.parentID,
+              parentID: data.student.ParentID,
+              pic: data.student.studentPic,
             })
           );
 
