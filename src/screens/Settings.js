@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { stopBackgroundMusic } from "../modules/backgroundMusic";
+
 export default function Settings({ navigation }) {
   const { playerName, playerPic } = useSelector((state) => state.auth);
   const { url } = useSelector((state) => state.global);
@@ -57,6 +59,7 @@ export default function Settings({ navigation }) {
           backgroundColor: "#18CCDB",
           borderRadius: 10,
           marginTop: 45,
+          elevation: 10,
         }}
         onPress={() => {
           navigation.navigate("ChooseAvatar");
@@ -93,14 +96,14 @@ export default function Settings({ navigation }) {
         style={styles.logoutContain}
         onPress={async () => {
           await SecureStore.deleteItemAsync("user");
-          await AsyncStorage.clear().then(() => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [{ name: "Login" }],
-              })
-            );
-          });
+          await AsyncStorage.removeItem("data");
+          stopBackgroundMusic();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: "Login" }],
+            })
+          );
         }}
       >
         <Ionicons name="log-out-outline" size={50} style={styles.icon} />

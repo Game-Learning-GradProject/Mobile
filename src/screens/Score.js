@@ -10,12 +10,21 @@ import { BackHandler } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { playBackgroundMusic, stopBackgroundMusic } from "../modules";
+import { useEffect } from "react";
+
 const Score = ({ navigation }) => {
   const route = useRoute();
   const wrong = route.params.wrong;
   const word_Pic = route.params.word_Pic;
   const path = route.params.path;
   const taskId = route.params.taskId;
+
+  useEffect(() => {
+    stopBackgroundMusic().then(() => {
+      playBackgroundMusic(2);
+    });
+  });
 
   return (
     <ImageBackground
@@ -47,7 +56,12 @@ const Score = ({ navigation }) => {
         {/* paly again */}
         <TouchableOpacity
           style={[styles.replayBtn]}
-          onPress={() => navigation.replace(path, { word_Pic, taskId })}
+          onPress={() => {
+            stopBackgroundMusic().then(() => {
+              playBackgroundMusic(1);
+            });
+            navigation.replace(path, { word_Pic, taskId });
+          }}
         >
           <MaterialCommunityIcons name="replay" size={60} color={"white"} />
           {/* <Image
@@ -100,7 +114,7 @@ const Score = ({ navigation }) => {
             { marginTop: "3%", backgroundColor: "#D82C2C" },
           ]}
           onPress={() => {
-            navigation.navigate("Start");
+            navigation.navigate("TasksMap");
             BackHandler.exitApp();
           }}
         >

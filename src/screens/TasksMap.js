@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   Text,
   ImageBackground,
@@ -13,13 +13,12 @@ import {
 import tw from "tailwind-react-native-classnames";
 import { FlashList } from "@shopify/flash-list";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import NetInfo from "@react-native-community/netinfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { fetchData, setWordPic } from "../store/globalSlice";
-import { useRef } from "react";
+import { playBackgroundMusic, stopBackgroundMusic } from "../modules";
 
 //array to hold games routes
 const games = [
@@ -65,6 +64,9 @@ export default function TasksMap({ navigation }) {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
+      stopBackgroundMusic().then(() => {
+        playBackgroundMusic(0);
+      });
       checkNet();
     });
 
@@ -201,6 +203,9 @@ export default function TasksMap({ navigation }) {
                 //first element
                 <TouchableOpacity
                   onPress={() => {
+                    stopBackgroundMusic().then(() => {
+                      playBackgroundMusic(1, 0.1);
+                    });
                     navigation.navigate(games[item.gameName], {
                       word_Pic: item.word_Pic,
                       taskId: item.taskId,
@@ -250,6 +255,9 @@ export default function TasksMap({ navigation }) {
                 <TouchableOpacity
                   disabled={!allLevels[index - 1].done ? true : false}
                   onPress={() => {
+                    stopBackgroundMusic().then(() => {
+                      playBackgroundMusic(1, 0.1);
+                    });
                     navigation.navigate(games[item.gameName], {
                       word_Pic: item.word_Pic,
                       taskId: item.taskId,

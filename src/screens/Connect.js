@@ -14,7 +14,6 @@ import tw from "tailwind-react-native-classnames";
 
 import styles from "../styles";
 import { soundEffects, random, text2speech } from "../modules";
-import { TouchableWithoutFeedback } from "react-native";
 
 const Connect = ({ navigation }) => {
   const route = useRoute();
