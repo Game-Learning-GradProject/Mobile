@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { BackHandler } from "react-native";
 import tw from "tailwind-react-native-classnames";
@@ -12,94 +18,104 @@ const Score = ({ navigation }) => {
   const taskId = route.params.taskId;
 
   return (
-    <View style={styles.body}>
-      {/* show the score */}
-      <View style={styles.container}>
-        <View style={styles.viewContainer}>
-          <Text style={[styles.text, { width: "70%" }, tw``]}>Score</Text>
-          <Text style={[styles.textContainer, { backgroundColor: "#00A91B" }]}>
-            {word_Pic.length - wrong}
-          </Text>
+    <ImageBackground
+      source={require("../../assets/backgrounds/verticalBG.png")}
+      style={[{ flex: 1 }, tw`justify-center`]}
+      imageStyle={{ resizeMode: "stretch" }}
+    >
+      <View style={styles.body}>
+        {/* show the score */}
+        <View style={styles.container}>
+          <View style={styles.viewContainer}>
+            <Text style={[styles.text, { width: "70%" }, tw``]}>Score</Text>
+            <Text
+              style={[styles.textContainer, { backgroundColor: "#00A91B" }]}
+            >
+              {word_Pic.length - wrong}
+            </Text>
+          </View>
+          {/* show wrong tries */}
+          <View style={[styles.viewContainer, { marginTop: "12%" }]}>
+            <Text style={[styles.text, { width: "70%" }]}>Wrong Tries</Text>
+            <Text
+              style={[styles.textContainer, { backgroundColor: "#D82C2C" }]}
+            >
+              {wrong}
+            </Text>
+          </View>
         </View>
-        {/* show wrong tries */}
-        <View style={[styles.viewContainer, { marginTop: "12%" }]}>
-          <Text style={[styles.text, { width: "70%" }]}>Wrong Tries</Text>
-          <Text style={[styles.textContainer, { backgroundColor: "#D82C2C" }]}>
-            {wrong}
-          </Text>
-        </View>
-      </View>
-      {/* paly again */}
-      <TouchableOpacity
-        style={[styles.replayBtn]}
-        onPress={() => navigation.replace(path, { word_Pic, taskId })}
-      >
-        <MaterialCommunityIcons name="replay" size={60} color={"white"} />
-        {/* <Image
+        {/* paly again */}
+        <TouchableOpacity
+          style={[styles.replayBtn]}
+          onPress={() => navigation.replace(path, { word_Pic, taskId })}
+        >
+          <MaterialCommunityIcons name="replay" size={60} color={"white"} />
+          {/* <Image
           source={require("../../assets/retry.png")}
           style={{ width: "15%", height: "70%", marginEnd: "6%" }}
         />
         <Text style={{ fontSize: 20, fontWeight: "bold", color: "#fff" }}>
           Play again
         </Text> */}
-      </TouchableOpacity>
+        </TouchableOpacity>
 
-      {/* paly another game */}
-      <TouchableOpacity
-        style={[
-          styles.TouchableOpacity,
-          {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#312F73",
-          },
-          tw` `,
-        ]}
-        onPress={() => navigation.replace("TasksMap", { word_Pic })}
-      >
-        <Text
+        {/* paly another game */}
+        <TouchableOpacity
           style={[
+            styles.TouchableOpacity,
             {
-              fontSize: 20,
-              fontWeight: "600",
-              color: "#fff",
-              marginRight: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#312F73",
             },
-            tw``,
+            tw` `,
           ]}
+          onPress={() => navigation.replace("TasksMap", { word_Pic })}
         >
-          Next
-        </Text>
-        <MaterialCommunityIcons
-          name="arrow-right-thick"
-          size={30}
-          color="white"
-        />
-      </TouchableOpacity>
+          <Text
+            style={[
+              {
+                fontSize: 20,
+                fontWeight: "600",
+                color: "#fff",
+                marginRight: 10,
+              },
+              tw``,
+            ]}
+          >
+            Next
+          </Text>
+          <MaterialCommunityIcons
+            name="arrow-right-thick"
+            size={30}
+            color="white"
+          />
+        </TouchableOpacity>
 
-      {/*quit*/}
-      <TouchableOpacity
-        style={[
-          styles.TouchableOpacity,
-          { marginTop: "3%", backgroundColor: "#D82C2C" },
-        ]}
-        onPress={() => {
-          navigation.navigate("Start");
-          BackHandler.exitApp();
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            color: "#fff",
+        {/*quit*/}
+        <TouchableOpacity
+          style={[
+            styles.TouchableOpacity,
+            { marginTop: "3%", backgroundColor: "#D82C2C" },
+          ]}
+          onPress={() => {
+            navigation.navigate("Start");
+            BackHandler.exitApp();
           }}
         >
-          Quit
-        </Text>
-      </TouchableOpacity>
-    </View>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "#fff",
+            }}
+          >
+            Quit
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -113,6 +129,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
     borderRadius: 20,
     elevation: 10,
+    opacity: 0.8,
   },
   viewContainer: {
     flexDirection: "row",
@@ -135,7 +152,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#9C9AFF",
+    // backgroundColor: "#9C9AFF",
   },
   text: {
     color: "#fff",
@@ -166,6 +183,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#5554aa",
     elevation: 5,
+    opacity: 0.8,
   },
 });
 

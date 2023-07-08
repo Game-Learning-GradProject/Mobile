@@ -74,7 +74,7 @@ export default function Listen_Choose({ navigation }) {
         <TouchableOpacity
           style={[
             tw`m-1.5 mr-2 ml-2 flex justify-center `,
-            { height: `${100 / 7}%`, width: "80%" },
+            { height: `${100 / 7}%`, width: "90%" },
           ]}
           key={i}
           onPress={() => {
@@ -94,7 +94,7 @@ export default function Listen_Choose({ navigation }) {
           ) : correct5 && i === 5 ? (
             <View style={styles.correct}></View>
           ) : (
-            <View style={[styles.cardView, tw`bg-pink-400`]}>
+            <View style={[styles.cardView]}>
               <Text
                 style={[
                   tw`text-center text-white text-4xl rounded-2xl font-bold`,
@@ -230,7 +230,7 @@ export default function Listen_Choose({ navigation }) {
 
   return (
     <ImageBackground
-      source={require("../../assets/backgrounds/sum_sub-bg.png")}
+      source={require("../../assets/backgrounds/verticalBG.png")}
       style={[{ flex: 1 }, tw`justify-center`]}
       imageStyle={{ resizeMode: "stretch" }}
     >
@@ -239,15 +239,19 @@ export default function Listen_Choose({ navigation }) {
           <TouchableOpacity
             style={
               noRepeat.length < 6 && [
-                tw`bg-pink-600 m-2 mb-3`,
+                tw`m-2 mb-3`,
                 {
-                  height: 70,
-                  width: 300,
+                  height: 80,
+                  width: "90%",
                   alignSelf: "center",
                   alignItems: "center",
                   justifyContent: "center",
                   flexDirection: "row",
-                  borderRadius: 80,
+                  borderRadius: 20,
+                  borderWidth: 6,
+                  backgroundColor: "#120f33",
+                  opacity: 0.75,
+                  borderColor: "#fff",
                 },
               ]
             }
@@ -265,7 +269,9 @@ export default function Listen_Choose({ navigation }) {
               }}
               style={[{ width: 70, height: 50 }]}
             />
-            <Text style={[tw`text-center w-3/6 text-white text-3xl`]}>
+            <Text
+              style={[tw`text-center w-3/6 text-white text-4xl font-semibold`]}
+            >
               Listen
             </Text>
           </TouchableOpacity>
@@ -289,8 +295,9 @@ const styles = StyleSheet.create({
   cardView: {
     display: "flex",
     justifyContent: "center",
-    borderRadius: 30,
+    borderRadius: 20,
     height: "100%",
-    opacity: 0.9,
+    opacity: 0.75,
+    backgroundColor: "#5c3bbc",
   },
 });

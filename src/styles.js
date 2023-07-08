@@ -72,7 +72,7 @@ export default StyleSheet.create({
     margin: "2%",
     alignItems: "center",
     justifyContent: "center",
-    opacity: 0.9,
+    opacity: 0.75,
   },
   img: {
     width: "50%",
@@ -82,7 +82,7 @@ export default StyleSheet.create({
   cardText: {
     width: "100%",
     height: "100%",
-    borderRadius: 30,
+    borderRadius: 20,
     textAlign: "center",
     textAlignVertical: "center",
     fontSize: 25,
@@ -92,7 +92,7 @@ export default StyleSheet.create({
   cardImg: {
     width: "100%",
     height: "100%",
-    borderRadius: 30,
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#8D3Eff",

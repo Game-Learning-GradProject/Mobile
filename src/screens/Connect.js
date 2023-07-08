@@ -14,6 +14,7 @@ import tw from "tailwind-react-native-classnames";
 
 import styles from "../styles";
 import { soundEffects, random, text2speech } from "../modules";
+import { TouchableWithoutFeedback } from "react-native";
 
 const Connect = ({ navigation }) => {
   const route = useRoute();
@@ -28,6 +29,9 @@ const Connect = ({ navigation }) => {
 
   //to set how many wrong answers
   const [wrong, setWrong] = useState(0);
+
+  const [chosenPicI, setChosenPicI] = useState(-1);
+  const [chosenWordI, setChosenWordI] = useState(-1);
 
   //if right match, will be true
   const [correct0, setCorrect0] = useState(false);
@@ -70,7 +74,7 @@ const Connect = ({ navigation }) => {
   }, [navigation, dispatch]);
 
   //////////////////////////////////////////////
-
+  useEffect(() => {}, [setChosenPicI, setChosenWordI]);
   ////////////////////creating words cards\\\\\\\\\\\\\\\\\\\\\\\\\\\
   var wordCards = [];
   var wordID = -1;
@@ -117,7 +121,17 @@ const Connect = ({ navigation }) => {
               {word_Pic[randomWords[i]]?.definitionInEn}
             </Text>
           ) : (
-            <Text style={[styles.cardText, , tw`text-white`]}>
+            <Text
+              style={[
+                styles.cardText,
+                chosenWordI === i && {
+                  borderWidth: 4,
+                  elevation: 10,
+                  borderColor: "yellow",
+                },
+                tw`text-white`,
+              ]}
+            >
               {word_Pic[randomWords[i]]?.definitionInEn}
             </Text>
           )}
@@ -175,7 +189,16 @@ const Connect = ({ navigation }) => {
               <Image source={{ uri: url + imgPath }} style={styles.img} />
             </View>
           ) : (
-            <View style={[styles.cardImg]}>
+            <View
+              style={[
+                styles.cardImg,
+                chosenPicI === i && {
+                  borderWidth: 4,
+                  elevation: 10,
+                  borderColor: "yellow",
+                },
+              ]}
+            >
               <Image source={{ uri: url + imgPath }} style={styles.img} />
             </View>
           )}
@@ -286,12 +309,14 @@ const Connect = ({ navigation }) => {
       setWrong(wrong + 1);
       //play sound
       soundEffects(1);
+      setChosenPicI(-1);
+      setChosenWordI(-1);
     }
   };
   ///////////////////////////////////////////////////////////////////
   return (
     <ImageBackground
-      source={require("../../assets/backgrounds/sum_sub-bg.png")}
+      source={require("../../assets/backgrounds/verticalBG.png")}
       style={[{ flex: 1 }, tw`justify-center`]}
       imageStyle={{ resizeMode: "stretch" }}
     >

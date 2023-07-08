@@ -1,8 +1,16 @@
-import { StyleSheet, Text, SafeAreaView, View, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  Pressable,
+  ImageBackground,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
+import tw from "tailwind-react-native-classnames";
 
 // import questions from "../data/questions";
 import { soundEffects } from "../modules";
@@ -104,7 +112,11 @@ const QuestionsAr = ({ navigation }) => {
   const currentQuestion = data[index];
 
   return (
-    <SafeAreaView>
+    <ImageBackground
+      source={require("../../assets/backgrounds/verticalBG.png")}
+      style={[{ flex: 1, padding: 10 }]}
+      imageStyle={{ resizeMode: "stretch" }}
+    >
       {/* Progress Bar */}
       <View
         style={{
@@ -116,12 +128,12 @@ const QuestionsAr = ({ navigation }) => {
           borderRadius: 20,
           justifyContent: "center",
           marginTop: 30,
-          marginLeft: 10,
+          // marginLeft: 10,
         }}
       >
         <Text
           style={{
-            backgroundColor: "#FFC0CB",
+            backgroundColor: "#8AE85E",
             borderRadius: 12,
             position: "absolute",
             left: 0,
@@ -134,13 +146,21 @@ const QuestionsAr = ({ navigation }) => {
       </View>
       <View
         style={{
-          marginTop: 50,
-          backgroundColor: "#F0F8FF",
+          marginTop: 80,
+          backgroundColor: "#261335",
+          opacity: 0.8,
           padding: 10,
-          borderRadius: 6,
+          borderRadius: 40,
         }}
       >
-        <Text style={{ fontSize: 18, fontWeight: "bold", textAlign: "center" }}>
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "bold",
+            textAlign: "center",
+            color: "#fff",
+          }}
+        >
           {currentQuestion?.sentence}
         </Text>
         <View style={{ marginTop: 12 }}>
@@ -157,7 +177,7 @@ const QuestionsAr = ({ navigation }) => {
                       flexDirection: "row",
                       alignItems: "center",
                       borderWidth: 0.5,
-                      borderColor: "#00FFFF",
+                      borderColor: "#000FFF",
                       marginVertical: 10,
                       backgroundColor: "green",
                       borderRadius: 20,
@@ -168,7 +188,7 @@ const QuestionsAr = ({ navigation }) => {
                       flexDirection: "row",
                       alignItems: "center",
                       borderWidth: 0.5,
-                      borderColor: "#00FFFF",
+                      borderColor: "#000FFF",
                       marginVertical: 10,
                       backgroundColor: "red",
                       borderRadius: 20,
@@ -178,19 +198,22 @@ const QuestionsAr = ({ navigation }) => {
                       flexDirection: "row",
                       alignItems: "center",
                       borderWidth: 0.5,
-                      borderColor: "#00FFFF",
+                      borderColor: "#000FFF",
+                      backgroundColor: "#fff",
                       marginVertical: 10,
                       borderRadius: 20,
                       justifyContent: "flex-end",
                     }
               }
             >
-              <Text style={{ marginRight: 10 }}>{item.answer}</Text>
+              <Text style={{ marginRight: 10, fontSize: 18 }}>
+                {item.answer}
+              </Text>
               {selectedAnswerIndex === index &&
               index == currentQuestion.definitionInAc ? (
                 <AntDesign
                   style={{
-                    borderColor: "#00FFFF",
+                    borderColor: "#000FFF",
                     textAlign: "center",
                     borderWidth: 0.5,
                     width: 40,
@@ -206,7 +229,7 @@ const QuestionsAr = ({ navigation }) => {
                 selectedAnswerIndex === index ? (
                 <AntDesign
                   style={{
-                    borderColor: "#00FFFF",
+                    borderColor: "#000FFF",
                     textAlign: "center",
                     borderWidth: 0.5,
                     width: 40,
@@ -222,7 +245,7 @@ const QuestionsAr = ({ navigation }) => {
               ) : (
                 <Text
                   style={{
-                    borderColor: "#00FFFF",
+                    borderColor: "#000FFF",
                     textAlign: "center",
                     borderWidth: 0.5,
                     width: 40,
@@ -246,7 +269,9 @@ const QuestionsAr = ({ navigation }) => {
                 marginTop: 45,
                 backgroundColor: "#F0F8FF",
                 padding: 10,
-                borderRadius: 7,
+                backgroundColor: "#261335",
+                opacity: 0.8,
+                borderRadius: 40,
                 height: 120,
               }
         }
@@ -256,10 +281,15 @@ const QuestionsAr = ({ navigation }) => {
             style={
               answerStatus == null
                 ? null
-                : { fontSize: 17, textAlign: "center", fontWeight: "bold" }
+                : {
+                    fontSize: 17,
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color: "#fff",
+                  }
             }
           >
-            {!!answerStatus ? "Correct Answer" : "Wrong Answer"}
+            {!!answerStatus ? "إجابة صحيحة" : "إجابة خاطئة"}
           </Text>
         )}
 
@@ -273,6 +303,9 @@ const QuestionsAr = ({ navigation }) => {
               marginRight: "auto",
               marginTop: 20,
               borderRadius: 6,
+              width: 100,
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Text style={{ color: "white" }}>انتهى</Text>
@@ -287,13 +320,16 @@ const QuestionsAr = ({ navigation }) => {
               marginRight: "auto",
               marginTop: 20,
               borderRadius: 6,
+              width: 100,
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Text style={{ color: "white" }}>التالي</Text>
           </Pressable>
         )}
       </View>
-    </SafeAreaView>
+    </ImageBackground>
   );
 };
 
