@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 
 import { sendAttempts } from "../store/globalSlice";
 import { soundEffects } from "../modules";
+import Board from "../components/Board";
 
 const Compare = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -85,7 +86,7 @@ const Compare = ({ navigation }) => {
           navigation.replace("Score", {
             wrong,
             word_Pic: data,
-            path: "Sum_Sub",
+            path: "Compare",
             taskId,
           });
         }, 500);
@@ -112,8 +113,9 @@ const Compare = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
+    <Board>
+      {/* <View style={styles.container}> */}
+      {/* <TouchableOpacity
         style={tw`ml-3 mt-2 bg-red-400 w-2/12 flex justify-center absolute top-5 left-3 items-center rounded-3xl border-2 border-red-600`}
         onPress={() => {
           // dispatch(sendAttempts({ questions, gameID: "3" }));
@@ -122,75 +124,86 @@ const Compare = ({ navigation }) => {
         }}
       >
         <Text style={tw`text-3xl text-center font-bold text-white`}>x</Text>
-      </TouchableOpacity>
-      <View style={styles.numbers}>
-        <TextInput
-          style={styles.input}
-          value={data[index].numbers.num1.toString()}
-          editable={false}
-        />
-        <TextInput
-          style={{
-            borderWidth: 1,
-            borderColor: "black",
-            padding: 5,
-            margin: 5,
-            textAlign: "center",
-            backgroundColor:
-              isCorrect === true
-                ? "green"
-                : isCorrect === false
-                ? "red"
-                : "#3454df",
-            color: "white",
-            width: 110,
-            height: 110,
-            borderRadius: 10,
-            fontSize: 50,
-            fontWeight: "800",
-          }}
-          value={selectedSymbol}
-          editable={false}
-        />
-        <TextInput
-          style={styles.input}
-          value={data[index].numbers.num2.toString()}
-          editable={false}
-        />
-      </View>
-      <View style={styles.buttons}>
-        {mathSymbols.map((symbol) => (
-          <TouchableWithoutFeedback
-            onPress={() => selectSymbol(symbol)}
-            key={symbol}
-          >
-            <View
-              style={{
-                flex: 1,
-                width: 100,
-                height: 90,
-                margin: 5,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#3454df",
-                borderRadius: 10,
-              }}
+      </TouchableOpacity> */}
+      <View style={styles.flexx}>
+        <View style={styles.numbers}>
+          <TextInput
+            style={styles.input}
+            value={data[index].numbers.num1.toString()}
+            editable={false}
+          />
+          <TextInput
+            style={{
+              borderWidth: 1,
+              borderColor: "black",
+              padding: 5,
+              margin: 5,
+              textAlign: "center",
+              backgroundColor:
+                isCorrect === true
+                  ? "green"
+                  : isCorrect === false
+                  ? "red"
+                  : "#3454df",
+              color: "white",
+              width: 100,
+              height: 100,
+              borderRadius: 10,
+              fontSize: 50,
+              fontWeight: "800",
+              opacity: isCorrect === false || isCorrect === true ? 1 : 0.5,
+            }}
+            value={selectedSymbol}
+            editable={false}
+          />
+          <TextInput
+            style={styles.input}
+            value={data[index].numbers.num2.toString()}
+            editable={false}
+          />
+        </View>
+        <View style={styles.buttons}>
+          {mathSymbols.map((symbol) => (
+            <TouchableWithoutFeedback
+              onPress={() => selectSymbol(symbol)}
+              key={symbol}
             >
-              <Text style={{ fontSize: 50, color: "#fff" }}>{symbol}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
-      </View>
-      {selectedSymbol !== "" && (
+              <View
+                style={{
+                  // flex: 1,
+                  width: 80,
+                  height: 80,
+                  margin: 5,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#3454df",
+                  borderRadius: 10,
+                }}
+              >
+                <Text style={{ fontSize: 50, color: "#fff" }}>{symbol}</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          ))}
+        </View>
+        {/* {selectedSymbol !== "" && ( */}
         <TouchableWithoutFeedback onPress={handleNextRound}>
           <View style={styles.feedback}>
-            <Text style={{ color: "#fff", fontSize: 25, fontWeight: "600" }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 25,
+                fontWeight: "600",
+                opacity: selectedSymbol !== "" ? 1 : 0.5,
+              }}
+            >
               check
             </Text>
           </View>
         </TouchableWithoutFeedback>
-      )}
-    </View>
+        {/* )} */}
+        {/* </View> */}
+      </View>
+    </Board>
   );
 };
 
@@ -205,18 +218,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    // marginBottom: 20,
     marginTop: 30,
   },
   input: {
     borderWidth: 1,
-    borderColor: "black",
-    color: "white",
+    borderColor: "white",
+    backgroundColor: "white",
+    color: "black",
     padding: 5,
     margin: 5,
     textAlign: "center",
-    width: 110,
-    height: 110,
+    width: 90,
+    height: 90,
     borderRadius: 10,
     fontSize: 30,
     fontWeight: "800",
@@ -225,19 +239,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
-    marginTop: 100,
+    marginBottom: 10,
+    // marginTop: 10,
   },
   feedback: {
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#340fdf",
-    width: 200,
+    // marginTop: 20,
+    backgroundColor: "#346fdf",
+    width: 110,
     height: 50,
     borderRadius: 5,
     borderWidth: 2,
     borderColor: "#346fdf",
+    marginRight: "auto",
+    marginLeft: "auto",
+  },
+  flexx: {
+    display: "flex",
+    transform: "rotate(90deg)",
   },
 });
 
