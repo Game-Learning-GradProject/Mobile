@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Platform, NativeModules, SafeAreaView } from "react-native";
+import {
+  Platform,
+  NativeModules,
+  SafeAreaView,
+  I18nManager,
+} from "react-native";
 import { Provider } from "react-redux";
 
 import { store } from "./src/store/index";
@@ -24,6 +30,12 @@ const { StatusBarManager } = NativeModules;
 const stack = createStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    I18nManager.forceRTL(false);
+    I18nManager.allowRTL(false);
+    I18nManager.swapLeftAndRightInRTL(false);
+  }, []);
+
   return (
     <Provider store={store}>
       <SafeAreaView
