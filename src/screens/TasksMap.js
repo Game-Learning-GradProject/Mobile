@@ -29,6 +29,7 @@ const games = [
   "Sum_Sub",
   "Missing-Word",
   "QuestionsAr",
+  "ManyChoicesAr",
 ];
 
 export default function TasksMap({ navigation }) {
