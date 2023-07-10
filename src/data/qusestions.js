@@ -35,7 +35,7 @@ export default [
       {
         id: "0",
         options: "G",
-        answer: "تسماح",
+        answer: "تمساح",
       },
       {
         id: "1",
@@ -91,7 +91,7 @@ export default [
       {
         id: "0",
         options: "G",
-        answer: "تسماح",
+        answer: "تمساح",
       },
       {
         id: "1",
