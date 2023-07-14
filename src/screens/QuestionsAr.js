@@ -16,6 +16,23 @@ import tw from "tailwind-react-native-classnames";
 import { soundEffects } from "../modules";
 import { sendAttempts } from "../store/globalSlice";
 
+const letters = [
+  "أ",
+  "ب",
+  "جـ",
+  "د",
+  "هـ",
+  "و",
+  "ز",
+  "حـ",
+  "ط",
+  "ي",
+  "ك",
+  "ل",
+  "م",
+  "ن",
+];
+
 const QuestionsAr = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -23,6 +40,8 @@ const QuestionsAr = ({ navigation }) => {
 
   const data = route.params.word_Pic;
   const { taskId } = route.params;
+
+  console.log("task:", data[0]);
   // const data = questions;
   // const taskId = "12345";
 
@@ -254,7 +273,7 @@ const QuestionsAr = ({ navigation }) => {
                     padding: 10,
                   }}
                 >
-                  {item.letter}
+                  {letters[index]}
                 </Text>
               )}
             </Pressable>

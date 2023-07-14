@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import config from "../config";
 
 export const checkUser = createAsyncThunk(
   "auth/checkUser",
@@ -6,7 +7,8 @@ export const checkUser = createAsyncThunk(
     const sendData = JSON.stringify(data);
     try {
       const res = await fetch(
-        "https://gamebasedlearning-ot4m.onrender.com/student/StudentLogIn",
+        //https://gamebasedlearning-ot4m.onrender.com
+        `${config.serverLink}/student/StudentLogIn`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

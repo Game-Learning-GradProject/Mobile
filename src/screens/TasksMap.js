@@ -271,7 +271,7 @@ export default function TasksMap({ navigation }) {
                       (index + 1) % 8 === 3 && { marginLeft: "40%" },
                       (index + 1) % 8 === 4 && { marginLeft: "30%" },
                       (index + 1) % 8 === 5 && { marginLeft: "25%" },
-                      (index + 1) % 8 === 6 && { marginLeft: "-40%" },
+                      (index + 1) % 8 === 6 && { marginRight: "52%" },
                       (index + 1) % 8 === 0 && { marginLeft: "47%" },
                     ]}
                   >

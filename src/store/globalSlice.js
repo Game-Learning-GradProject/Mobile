@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import config from "../config";
 
 export const fetchData = createAsyncThunk(
   "global/fetchData",
@@ -14,7 +15,7 @@ export const fetchData = createAsyncThunk(
     // });
     try {
       const res = await fetch(
-        `https://gamebasedlearning-ot4m.onrender.com/Task/TakeTask/${studentID}`,
+        `${config.serverLink}/Task/TakeTask/${studentID}`,
         {
           method: "GET",
           headers: {
@@ -52,7 +53,7 @@ export const sendAttempts = createAsyncThunk(
     );
     try {
       const res = await fetch(
-        `https://gamebasedlearning-ot4m.onrender.com/feedback/${id}/${taskId}/${gameId}`,
+        `${config.serverLink}/feedback/${id}/${taskId}/${gameId}`,
         {
           method: "POST",
           headers: {
@@ -71,7 +72,7 @@ export const sendAttempts = createAsyncThunk(
 );
 const initialState = {
   word_Pic: [],
-  url: "https://gamebasedlearning-ot4m.onrender.com/",
+  url: `${config.serverLink}/`,
   avatar: "https://assets2.lottiefiles.com/packages/lf20_lc46h4dr.json",
   error: null,
   loading: false,
