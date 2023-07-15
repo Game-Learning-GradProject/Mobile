@@ -108,6 +108,7 @@ export default function Sum_Sub({ navigation }) {
 
       setTimeout(() => {
         setChosenAns(null);
+        if (inCorrect[done] === 3) setDone(done + 1);
       }, 400);
     }
   };
